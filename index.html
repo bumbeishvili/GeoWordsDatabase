@@ -18,35 +18,9 @@
     <geo-navbar><nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
+        
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse container" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!-- ngRepeat: content in contents --><li class="list-nav" ng-repeat="content in contents">
-                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">რითმა</a>
-                </li><!-- end ngRepeat: content in contents --><li class="list-nav " ng-repeat="content in contents">
-                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">wildCard-ით ძებნა</a>
-                </li><!-- end ngRepeat: content in contents --><li class="list-nav " ng-repeat="content in contents">
-                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">რეგექსით ძებნა</a>
-                </li><!-- end ngRepeat: content in contents --><li class="list-nav  active" ng-repeat="content in contents">
-                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">სტატისტიკა</a>
-                </li><!-- end ngRepeat: content in contents -->
-            </ul>
-            <div class="pull-right" style="margin-top:9px;">
-                <button ng-click="geoLang()" ng-disabled="currentLang=='geo'" class="btn btn-default" disabled="disabled">geo</button>
-                <button ng-click="engLang()" ng-disabled="currentLang=='eng'" class="btn btn-default">eng</button>
-            </div>
-            
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav></geo-navbar>
+        
     <div class="container body-content">
 
         <!-- ngIf: contents.wildCardContent.active -->
