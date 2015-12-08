@@ -1,1 +1,511 @@
-My Page
+<html ng-app="GeoWords" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title ng-bind="trnsl('search')+ ' ^_^'" class="ng-binding">მოძებნე ^_^</title>
+    <link href="css/geokbd/jquery.geokbd.css" rel="stylesheet" type="text/css">
+    <link href="css/custom/app.css" rel="stylesheet" type="text/css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/icon.png">
+
+</head>
+<body ng-controller="pageCtrl" class="ng-scope">
+    <geo-navbar><nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse container" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!-- ngRepeat: content in contents --><li class="list-nav" ng-repeat="content in contents">
+                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">რითმა</a>
+                </li><!-- end ngRepeat: content in contents --><li class="list-nav " ng-repeat="content in contents">
+                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">wildCard-ით ძებნა</a>
+                </li><!-- end ngRepeat: content in contents --><li class="list-nav " ng-repeat="content in contents">
+                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">რეგექსით ძებნა</a>
+                </li><!-- end ngRepeat: content in contents --><li class="list-nav  active" ng-repeat="content in contents">
+                    <a href="#" ng-click="changeCurrentContent(content)" class="ng-binding">სტატისტიკა</a>
+                </li><!-- end ngRepeat: content in contents -->
+            </ul>
+            <div class="pull-right" style="margin-top:9px;">
+                <button ng-click="geoLang()" ng-disabled="currentLang=='geo'" class="btn btn-default" disabled="disabled">geo</button>
+                <button ng-click="engLang()" ng-disabled="currentLang=='eng'" class="btn btn-default">eng</button>
+            </div>
+            
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav></geo-navbar>
+    <div class="container body-content">
+
+        <!-- ngIf: contents.wildCardContent.active -->
+
+        <!-- ngIf: contents.regexContent.active -->
+
+        <!-- ngIf: contents.rhymeContent.active -->
+
+        <!-- ngIf: contents.statisticContent.active --><statistic-content ng-if="contents.statisticContent.active" class="ng-scope ng-isolate-scope"><div class="col-sm-12">
+    <div class="col-sm-12 no-padding">
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding">უნიკალური სიტყვების რაოდენობა</div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered ng-binding" ng-bind="widgetStatistics.UniqueWordsCount|number:0">274,538</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding">მთლიანი სიტყვების რაოდენობა</div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered ng-binding" ng-bind="widgetStatistics.AllWordsCount|number:0">2,510,061</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding">ასო-ბგერების რაოდენობა</div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered ng-binding" ng-bind="widgetStatistics.AllCharCount|number:0">16,745,694</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding"> ყველაზე განმეორებადი სიტყვა </div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered">
+                        <span ng-bind="commonWords[0].title" class="ng-binding">და</span>
+                        (<span ng-bind="(commonWords[0].quantity/widgetStatistics.AllWordsCount*100|number:2)+' %'" class="ng-binding">4.53 %</span>)
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding">ყველაზე განმეორებადი ასო-ბგერა</div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered">
+                        <span ng-bind="commonChars[0].title" class="ng-binding">ა</span>
+                        (<span ng-bind="(commonChars[0].quantity/widgetStatistics.AllCharCount*100|number:2)+' %'" class="ng-binding">15.11 %</span>) 
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading ng-binding"> ნაკლებ განმეორებადი ასო-ბგერა</div>
+                <div class="panel-body">
+                    <h3 class="text-center col-centered">
+                        <span ng-bind="commonChars[32].title" class="ng-binding">ჟ</span>
+						(<span ng-bind="(commonChars[32].quantity/widgetStatistics.AllCharCount*100|number:2)+' %'" class="ng-binding">0.07 %</span>) 
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 ">
+        <div class="col-sm-6 no-padding">
+            <div class="panel panel-info">
+                <div class="panel-heading ng-binding"> 33  ყველაზე განმეორებადი სიტყვა </div>
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody><tr>
+                        <th>#</th>
+                        <th class="ng-binding">სიტყვა</th>
+                        <th class="ng-binding">რაოდენობა ბაზაში</th>
+                        <th class="ng-binding">პროცენტული ფარდობა</th>
+                    </tr>
+                    <!-- ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">1</td>
+                        <td ng-bind="item.title" class="ng-binding">და</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">113,772</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">4.533 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">2</td>
+                        <td ng-bind="item.title" class="ng-binding">რომ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">21,536</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.858 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">3</td>
+                        <td ng-bind="item.title" class="ng-binding">არ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">19,784</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.788 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">4</td>
+                        <td ng-bind="item.title" class="ng-binding">ამ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">11,906</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.474 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">5</td>
+                        <td ng-bind="item.title" class="ng-binding">ეს</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">11,272</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.449 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">6</td>
+                        <td ng-bind="item.title" class="ng-binding">თუ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">10,669</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.425 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">7</td>
+                        <td ng-bind="item.title" class="ng-binding">იყო</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">10,580</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.422 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">8</td>
+                        <td ng-bind="item.title" class="ng-binding">რომელიც</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">10,440</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.416 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">9</td>
+                        <td ng-bind="item.title" class="ng-binding">ა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">9,656</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.385 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">10</td>
+                        <td ng-bind="item.title" class="ng-binding">მაგრამ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">9,457</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.377 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">11</td>
+                        <td ng-bind="item.title" class="ng-binding">კი</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">9,373</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.373 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">12</td>
+                        <td ng-bind="item.title" class="ng-binding">ან</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">9,326</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.372 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">13</td>
+                        <td ng-bind="item.title" class="ng-binding">არა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">8,670</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.345 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">14</td>
+                        <td ng-bind="item.title" class="ng-binding">უნდა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">7,982</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.318 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">15</td>
+                        <td ng-bind="item.title" class="ng-binding">მე</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">7,450</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.297 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">16</td>
+                        <td ng-bind="item.title" class="ng-binding">მისი</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">7,266</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.289 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">17</td>
+                        <td ng-bind="item.title" class="ng-binding">ის</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">7,007</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.279 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">18</td>
+                        <td ng-bind="item.title" class="ng-binding">რა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">6,746</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.269 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">19</td>
+                        <td ng-bind="item.title" class="ng-binding">იგი</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">6,448</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.257 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">20</td>
+                        <td ng-bind="item.title" class="ng-binding">მას</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">6,424</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.256 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">21</td>
+                        <td ng-bind="item.title" class="ng-binding">როგორც</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">6,035</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.240 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">22</td>
+                        <td ng-bind="item.title" class="ng-binding">იმ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">5,618</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.224 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">23</td>
+                        <td ng-bind="item.title" class="ng-binding">ერთი</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">5,440</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.217 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">24</td>
+                        <td ng-bind="item.title" class="ng-binding">ილია</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">5,169</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.206 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">25</td>
+                        <td ng-bind="item.title" class="ng-binding">არის</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">5,162</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.206 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">26</td>
+                        <td ng-bind="item.title" class="ng-binding">რაც</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,992</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.199 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">27</td>
+                        <td ng-bind="item.title" class="ng-binding">შემდეგ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,910</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.196 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">28</td>
+                        <td ng-bind="item.title" class="ng-binding">მათ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,707</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.188 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">29</td>
+                        <td ng-bind="item.title" class="ng-binding">სხვა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,655</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.185 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">30</td>
+                        <td ng-bind="item.title" class="ng-binding">რ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,476</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.178 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">31</td>
+                        <td ng-bind="item.title" class="ng-binding">მის</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,148</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.165 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">32</td>
+                        <td ng-bind="item.title" class="ng-binding">გაზ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,104</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.164 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords --><tr ng-repeat="item in commonWords" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">33</td>
+                        <td ng-bind="item.title" class="ng-binding">ს</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">4,006</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'" class="ng-binding">0.160 %</td>
+                    </tr><!-- end ngRepeat: item in commonWords -->
+                </tbody></table>
+            </div>
+        </div>
+        <div class="col-sm-6 no-padding">
+            <div class="panel panel-info">
+                <div class="panel-heading ng-binding">ასო ბგერათა სიხშირე  </div>
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody><tr>
+                        <th>#</th>
+                        <th class="ng-binding">ასო-ბგერა</th>
+                         <th class="ng-binding">რაოდენობა ბაზაში</th>
+                        <th class="ng-binding">პროცენტული ფარდობა</th>
+                    </tr>
+                    <!-- ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">1</td>
+                        <td ng-bind="item.title" class="ng-binding">ა</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">2,530,538</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">15.112 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">2</td>
+                        <td ng-bind="item.title" class="ng-binding">ი</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">1,911,726</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">11.416 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">3</td>
+                        <td ng-bind="item.title" class="ng-binding">ე</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">1,476,393</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">8.817 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">4</td>
+                        <td ng-bind="item.title" class="ng-binding">ს</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">1,095,167</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">6.540 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">5</td>
+                        <td ng-bind="item.title" class="ng-binding">რ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">983,601</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">5.874 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">6</td>
+                        <td ng-bind="item.title" class="ng-binding">მ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">915,557</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">5.467 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">7</td>
+                        <td ng-bind="item.title" class="ng-binding">ო</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">833,482</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">4.977 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">8</td>
+                        <td ng-bind="item.title" class="ng-binding">დ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">722,750</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">4.316 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">9</td>
+                        <td ng-bind="item.title" class="ng-binding">ლ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">711,856</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">4.251 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">10</td>
+                        <td ng-bind="item.title" class="ng-binding">ნ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">699,404</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">4.177 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">11</td>
+                        <td ng-bind="item.title" class="ng-binding">ვ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">600,848</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">3.588 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">12</td>
+                        <td ng-bind="item.title" class="ng-binding">ბ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">582,006</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">3.476 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">13</td>
+                        <td ng-bind="item.title" class="ng-binding">თ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">474,138</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">2.831 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">14</td>
+                        <td ng-bind="item.title" class="ng-binding">უ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">458,693</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">2.739 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">15</td>
+                        <td ng-bind="item.title" class="ng-binding">გ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">388,321</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">2.319 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">16</td>
+                        <td ng-bind="item.title" class="ng-binding">ხ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">268,693</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">1.605 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">17</td>
+                        <td ng-bind="item.title" class="ng-binding">შ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">248,295</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">1.483 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">18</td>
+                        <td ng-bind="item.title" class="ng-binding">ც</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">241,681</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">1.443 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">19</td>
+                        <td ng-bind="item.title" class="ng-binding">ტ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">237,517</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">1.418 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">20</td>
+                        <td ng-bind="item.title" class="ng-binding">კ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">224,002</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">1.338 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">21</td>
+                        <td ng-bind="item.title" class="ng-binding">ქ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">165,025</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.985 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">22</td>
+                        <td ng-bind="item.title" class="ng-binding">წ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">150,835</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.901 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">23</td>
+                        <td ng-bind="item.title" class="ng-binding">ზ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">131,009</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.782 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">24</td>
+                        <td ng-bind="item.title" class="ng-binding">ყ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">122,720</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.733 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">25</td>
+                        <td ng-bind="item.title" class="ng-binding">ფ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">119,333</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.713 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">26</td>
+                        <td ng-bind="item.title" class="ng-binding">პ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">101,327</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.605 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">27</td>
+                        <td ng-bind="item.title" class="ng-binding">ღ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">90,833</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.542 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">28</td>
+                        <td ng-bind="item.title" class="ng-binding">ძ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">82,867</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.495 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">29</td>
+                        <td ng-bind="item.title" class="ng-binding">ჩ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">68,584</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.410 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">30</td>
+                        <td ng-bind="item.title" class="ng-binding">ჭ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">35,966</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.215 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">31</td>
+                        <td ng-bind="item.title" class="ng-binding">ჯ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">35,742</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.213 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">32</td>
+                        <td ng-bind="item.title" class="ng-binding">ჰ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">24,911</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.149 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars --><tr ng-repeat="item in commonChars" class="ng-scope">
+                        <td ng-bind="$index+1" class="ng-binding">33</td>
+                        <td ng-bind="item.title" class="ng-binding">ჟ</td>
+                        <td ng-bind="item.quantity|number:0" class="ng-binding">11,874</td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'" class="ng-binding">0.071 %</td>
+                    </tr><!-- end ngRepeat: item in commonChars -->
+                </tbody></table>
+            </div>
+        </div>
+    </div>
+</div></statistic-content><!-- end ngIf: contents.statisticContent.active -->
+
+        <hr>
+        <footer>
+            <span>
+               <a href="https://github.com/bumbeishvili/geoWords" target="_blank">Github Repository </a>
+            </span>
+        </footer>
+    </div>
+    <div wc-overlay="" wc-overlay-delay="300" class="ng-isolate-scope"><div id="overlay-container" class="overlayContainer" style="display: none;"><div id="overlay-background" class="overlayBackground"></div><div id="overlay-content" class="overlayContent" data-ng-transclude="" style="top: 333.5px; left: 683px;">
+        <div class="throbber-loader ng-scope">
+            Loading…
+        </div>
+    </div></div></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="js/plugins/pagination/angular-table.min.js"></script>
+
+
+    <script src="js/plugins/geokbd/jquery.geokbd.js"></script>
+
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/directives/directives.js"></script>
+    <script src="js/plugins/loading/wcAngularOverlay.js"></script>
+
+
+
+</body></html>
