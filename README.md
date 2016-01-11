@@ -1,7 +1,7 @@
 # GeoWordsDatabase
 This Mysql database contains around 310 000 unique Georgian words. 
 <br>
- check db statistics    <a href="http://geoword.ga/ " target="_blank">geoword.ga </a> <br>
+ check db statistics    <a href="http://bumbeishvili.github.io/GeoWordsDatabase/ " target="_blank">here </a> <br>
  <br><br>
 Database structure
 <br>
