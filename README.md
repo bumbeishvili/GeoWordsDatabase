@@ -11,5 +11,5 @@ This Mysql database contains around 310 000 unique Georgian words.
 Database structure
 
 
-![Database Relations image](https://raw.githubusercontent.com/bumbeishvili/GeoWordsDatabase/master/relations.png?raw=true "Optional Title")
+![Database Relations image](assets/relations.png)
 
