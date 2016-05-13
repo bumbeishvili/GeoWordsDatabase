@@ -10,5 +10,5 @@ This data was extracted with the folowing command
           from words_history 
           where source_id != 37) not_lastnames
         on w.id = not_lastnames.word_id
-        INTO OUTFILE 'd://file.csv'
+        INTO OUTFILE 'd://all_words_except_unique_source_lastname.csv'
         FIELDS TERMINATED BY ','
