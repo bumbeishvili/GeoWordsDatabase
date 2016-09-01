@@ -1,4 +1,4 @@
-Folder contains only unique english encoded words in .csv format
+Folder contains only unique english encoded words in .csv format and also sqlite db file
 
 This data was extracted with the folowing command 
 
