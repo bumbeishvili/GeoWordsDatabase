@@ -15,6 +15,8 @@ This Mysql database contains around 310 000 unique Georgian words.
 
 ![Database Relations image](assets/relations.png)
 
+# Statistics
+
  <div class="col-sm-12 ">
         <div class="col-sm-4">
             <div class="panel panel-success">
