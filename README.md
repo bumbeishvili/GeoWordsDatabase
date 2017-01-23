@@ -7,7 +7,7 @@ This Mysql database contains around 310 000 unique Georgian words.
  
  **linked apps:**  
  [geowords](https://github.com/bumbeishvili/geoWords) - web client  
- [ritma](https://github.com/bumbeishvili/ionic2-apps#ritma) - mobile client
+ [ritma](https://github.com/bumbeishvili/ionic2-apps#ritma) - mobile client  
  [რითმა](https://github.com/bumbeishvili/fb-ritma-messenger-bot) - fb chat bot
  
  
