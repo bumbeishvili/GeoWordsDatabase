@@ -6,16 +6,6 @@ All credits - [Giorgi Jvaridze](#0xh3x)
 
 <div class="post-frame">
             
-                
-                    <section class="back_to_blog" id="extra_links">
-                        <a href="/web/20130524144932/http://blog.giorgijvaridze.com/" rel="up">← Back to blog</a>
-                    </section>
-                
-            
-                
-            
-            
-            
             
             
           <div id="articles">
