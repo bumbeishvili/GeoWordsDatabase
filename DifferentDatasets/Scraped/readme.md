@@ -1,3 +1,59 @@
+
+#### nodejs script, which converts txt files to structured json 
+
+from the same directory
+`node server.js sorted.txt`
+
+```javascript
+
+// Make sure we got a filename on the command line.
+if (process.argv.length < 3) {
+  console.log('Usage: node ' + process.argv[1] + ' FILENAME');
+  process.exit(1);
+}
+// Read the file and print its contents.
+var fs = require('fs')
+  , filename = process.argv[2];
+fs.readFile(filename, 'utf8', function (err, data) {
+  if (err) throw err;
+  console.log('OK: ' + filename);
+  write(generate(data));
+});
+
+
+
+function write(content) {
+  fs.writeFile("result.json", content, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  });
+}
+
+function generate(data) {
+  var i = 0;
+  var result = data
+    .split(/\n/)
+    .map(d => d.split(/\s/))
+    .map(d => {
+      return {
+        "_id": "id" + (++i),
+        "id": i,
+        "word": d[0],
+        "count": d[1]
+      }
+    })
+    .map(d => JSON.stringify(d))
+    .join('\n');
+
+  return result;
+}
+```
+
+
+
+
 # Bottom is a story of gathering this words info
 
 p.s. Links are not working,all contents were copied from webArchive and it's only for informational purposes
