@@ -5,13 +5,17 @@ This Mysql database contains around 310 000 unique Georgian words.
 
  check [db statistics](http://bumbeishvili.github.io/GeoWordsDatabase/) and [words cloud visualization](https://bl.ocks.org/bumbeishvili/raw/9ca6cdcfdd50b36af09c0b9d729a4adb/2d941a6fbba72c7cdfba6e2b947671a43cc1f70c/)
  
- **linked apps:**  
- [geowords](https://github.com/bumbeishvili/geoWords) - web client  
- [ritma](https://github.com/bumbeishvili/ionic2-apps#ritma) - mobile client  
- [რითმა](https://github.com/bumbeishvili/fb-ritma-messenger-bot) - fb chat bot
+ # Other datasets
+ 1. [akalongman / geo-words](https://github.com/akalongman/geo-words)  
+ 2. [0xh3x / scraped-words](https://github.com/bumbeishvili/GeoWordsDatabase/tree/master/DifferentDatasets/Scraped)
+ 
+ # Linked Applications
+ * [geowords](https://github.com/bumbeishvili/geoWords) - web client  (web app is not online)  
+ * [ritma](https://github.com/bumbeishvili/ionic2-apps#ritma) - mobile client  (apk can be downloaded, but is not in play store)  
+ * [რითმა](https://github.com/bumbeishvili/fb-ritma-messenger-bot) - fb chat bot (online)  
  
  
-**Database structure**
+# Database structure
 
 
 ![Database Relations image](assets/relations.png)
