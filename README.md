@@ -14,6 +14,7 @@ This Mysql database contains around 310 000 unique Georgian words.
  
  
  # Linked Applications
+ * [ka_GE.spell](https://github.com/gamag/ka_GE.spell) - Georgian spell checking dictionary
  * [geowords](https://github.com/bumbeishvili/geoWords) - web client  (web app is not online)  
  * [ritma](https://github.com/bumbeishvili/ionic2-apps#ritma) - mobile client  (apk can be downloaded, but is not in play store)  
  * [რითმა](https://github.com/bumbeishvili/fb-ritma-messenger-bot) - fb chat bot (online)  
