@@ -6,8 +6,12 @@ This Mysql database contains around 310 000 unique Georgian words.
  check [db statistics](http://bumbeishvili.github.io/GeoWordsDatabase/) and [words cloud visualization](https://bl.ocks.org/bumbeishvili/raw/9ca6cdcfdd50b36af09c0b9d729a4adb/2d941a6fbba72c7cdfba6e2b947671a43cc1f70c/)
  
  # Other datasets
- 1. [akalongman / geo-words](https://github.com/akalongman/geo-words)  
- 2. [0xh3x / scraped-words](https://github.com/bumbeishvili/GeoWordsDatabase/tree/master/DifferentDatasets/Scraped)
+ 1. [akalongman (Avtandil Kikabidze) / geo-words](https://github.com/akalongman/geo-words)  
+ 2. [0xh3x (Giorgi Jvaridze) / scraped-words](https://github.com/bumbeishvili/GeoWordsDatabase/tree/master/DifferentDatasets/Scraped)
+ 3. [sandrinio( Sandro Sukhitashvili) / Scraped / GeoWordsDatabase](https://github.com/sandrinio1/GeorgianWordsDataBase)
+ 4. [Kevin Scannell / Scraped](http://crubadan.org/languages/ka)
+ 
+ 
  
  # Linked Applications
  * [geowords](https://github.com/bumbeishvili/geoWords) - web client  (web app is not online)  
