@@ -10,6 +10,7 @@ This Mysql database contains around 310 000 unique Georgian words.
  2. [0xh3x (Giorgi Jvaridze) / scraped-words](https://github.com/bumbeishvili/GeoWordsDatabase/tree/master/DifferentDatasets/Scraped)
  3. [sandrinio( Sandro Sukhitashvili) / Scraped / GeoWordsDatabase](https://github.com/sandrinio1/GeorgianWordsDataBase)
  4. [Kevin Scannell / Scraped](http://crubadan.org/languages/ka)
+ 5. [Irakli Koberidze / Merged / Frequency_Dictionary_GE_363_202](https://github.com/irakli97/Frequency_Dictionary_GE_363_202)
  
  
  
